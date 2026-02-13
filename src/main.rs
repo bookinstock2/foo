@@ -39,6 +39,15 @@ pub fn count_vowels(s: &str) -> usize {
         .count()
 }
 
+pub fn fizzbuzz(n: u32) -> String {
+    match (n % 3, n % 5) {
+        (0, 0) => String::from("FizzBuzz"),
+        (0, _) => String::from("Fizz"),
+        (_, 0) => String::from("Buzz"),
+        _ => n.to_string(),
+    }
+}
+
 pub fn is_palindrome(s: &str) -> bool {
     let lower: String = s.to_lowercase();
     let chars: Vec<char> = lower.chars().collect();
@@ -63,6 +72,11 @@ fn main() {
     println!("Vowels in 'Hello Rust': {vowels}");
     let palindrome = is_palindrome("Racecar");
     println!("Is 'Racecar' a palindrome? {palindrome}");
+    println!();
+    println!("FizzBuzz (1-15):");
+    for i in 1..=15 {
+        println!("  {i}: {}", fizzbuzz(i));
+    }
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -269,5 +283,34 @@ mod tests {
     #[test]
     fn test_is_palindrome_mixed_case() {
         assert!(is_palindrome("MadAm"));
+    }
+
+    #[test]
+    fn test_fizzbuzz_fizz() {
+        assert_eq!(fizzbuzz(3), "Fizz");
+        assert_eq!(fizzbuzz(6), "Fizz");
+        assert_eq!(fizzbuzz(9), "Fizz");
+    }
+
+    #[test]
+    fn test_fizzbuzz_buzz() {
+        assert_eq!(fizzbuzz(5), "Buzz");
+        assert_eq!(fizzbuzz(10), "Buzz");
+        assert_eq!(fizzbuzz(20), "Buzz");
+    }
+
+    #[test]
+    fn test_fizzbuzz_fizzbuzz() {
+        assert_eq!(fizzbuzz(15), "FizzBuzz");
+        assert_eq!(fizzbuzz(30), "FizzBuzz");
+        assert_eq!(fizzbuzz(45), "FizzBuzz");
+    }
+
+    #[test]
+    fn test_fizzbuzz_number() {
+        assert_eq!(fizzbuzz(1), "1");
+        assert_eq!(fizzbuzz(2), "2");
+        assert_eq!(fizzbuzz(4), "4");
+        assert_eq!(fizzbuzz(7), "7");
     }
 }
