@@ -39,6 +39,18 @@ pub fn count_vowels(s: &str) -> usize {
         .count()
 }
 
+pub fn is_palindrome(s: &str) -> bool {
+    let lower: String = s.to_lowercase();
+    let chars: Vec<char> = lower.chars().collect();
+    let len = chars.len();
+    for i in 0..len / 2 {
+        if chars[i] != chars[len - 1 - i] {
+            return false;
+        }
+    }
+    true
+}
+
 fn main() {
     println!("{}", hello("Rust"));
     println!("{}", greet("Rust"));
@@ -49,6 +61,8 @@ fn main() {
     println!("Reversed: {reversed}");
     let vowels = count_vowels("Hello Rust");
     println!("Vowels in 'Hello Rust': {vowels}");
+    let palindrome = is_palindrome("Racecar");
+    println!("Is 'Racecar' a palindrome? {palindrome}");
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -220,5 +234,40 @@ mod tests {
     #[test]
     fn test_count_vowels_all_vowels() {
         assert_eq!(count_vowels("aEiOu"), 5);
+    }
+
+    #[test]
+    fn test_is_palindrome_basic() {
+        assert!(is_palindrome("racecar"));
+    }
+
+    #[test]
+    fn test_is_palindrome_ignore_case() {
+        assert!(is_palindrome("Racecar"));
+    }
+
+    #[test]
+    fn test_is_palindrome_single_char() {
+        assert!(is_palindrome("a"));
+    }
+
+    #[test]
+    fn test_is_palindrome_empty() {
+        assert!(is_palindrome(""));
+    }
+
+    #[test]
+    fn test_is_palindrome_not_palindrome() {
+        assert!(!is_palindrome("hello"));
+    }
+
+    #[test]
+    fn test_is_palindrome_even_length() {
+        assert!(is_palindrome("abba"));
+    }
+
+    #[test]
+    fn test_is_palindrome_mixed_case() {
+        assert!(is_palindrome("MadAm"));
     }
 }
