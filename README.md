@@ -31,3 +31,23 @@ cargo run
 2. 理解 `borrowing` 后再看 `lifetime`
 3. `traits_generics` 是写出优雅 Rust 代码的关键
 4. `error_handling` 是 Rust 的惯用错误处理方式
+
+## 测试
+
+使用 pytest 运行测试：
+
+```bash
+pytest
+```
+
+运行特定测试文件：
+
+```bash
+pytest tests/test_file.py
+```
+
+运行详细输出：
+
+```bash
+pytest -v
+```
