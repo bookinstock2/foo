@@ -29,12 +29,18 @@ pub fn lucky_number(name: &str) -> u32 {
     sum % 100
 }
 
+pub fn reverse_name(name: &str) -> String {
+    name.chars().rev().collect()
+}
+
 fn main() {
     println!("{}", hello("Rust"));
     println!("{}", greet("Rust"));
     println!("{}", farewell("Rust"));
     let n = lucky_number("Rust");
     println!("Your lucky number is: {n}");
+    let reversed = reverse_name("Rust");
+    println!("Reversed: {reversed}");
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -161,5 +167,20 @@ mod tests {
     fn test_lucky_number_single_char() {
         // 'A' = 65, 65 % 100 = 65
         assert_eq!(lucky_number("A"), 65);
+    }
+
+    #[test]
+    fn test_reverse_name() {
+        assert_eq!(reverse_name("Rust"), "tsuR");
+    }
+
+    #[test]
+    fn test_reverse_name_empty() {
+        assert_eq!(reverse_name(""), "");
+    }
+
+    #[test]
+    fn test_reverse_name_chinese() {
+        assert_eq!(reverse_name("你好世界"), "界世好你");
     }
 }
