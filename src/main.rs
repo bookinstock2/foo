@@ -33,6 +33,12 @@ pub fn reverse_name(name: &str) -> String {
     name.chars().rev().collect()
 }
 
+pub fn count_vowels(s: &str) -> usize {
+    s.chars()
+        .filter(|c| matches!(c.to_ascii_lowercase(), 'a' | 'e' | 'i' | 'o' | 'u'))
+        .count()
+}
+
 fn main() {
     println!("{}", hello("Rust"));
     println!("{}", greet("Rust"));
@@ -41,6 +47,8 @@ fn main() {
     println!("Your lucky number is: {n}");
     let reversed = reverse_name("Rust");
     println!("Reversed: {reversed}");
+    let vowels = count_vowels("Hello Rust");
+    println!("Vowels in 'Hello Rust': {vowels}");
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -182,5 +190,35 @@ mod tests {
     #[test]
     fn test_reverse_name_chinese() {
         assert_eq!(reverse_name("你好世界"), "界世好你");
+    }
+
+    #[test]
+    fn test_count_vowels_basic() {
+        assert_eq!(count_vowels("hello"), 2);
+    }
+
+    #[test]
+    fn test_count_vowels_uppercase() {
+        assert_eq!(count_vowels("AEIOU"), 5);
+    }
+
+    #[test]
+    fn test_count_vowels_mixed_case() {
+        assert_eq!(count_vowels("Hello Rust"), 3);
+    }
+
+    #[test]
+    fn test_count_vowels_no_vowels() {
+        assert_eq!(count_vowels("bcdfg"), 0);
+    }
+
+    #[test]
+    fn test_count_vowels_empty() {
+        assert_eq!(count_vowels(""), 0);
+    }
+
+    #[test]
+    fn test_count_vowels_all_vowels() {
+        assert_eq!(count_vowels("aEiOu"), 5);
     }
 }
