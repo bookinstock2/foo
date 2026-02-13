@@ -20,9 +20,14 @@ pub fn greet(name: &str) -> String {
     format!("Hey, {}! Welcome!", name)
 }
 
+pub fn farewell(name: &str) -> String {
+    format!("Goodbye, {}! See you next time!", name)
+}
+
 fn main() {
     println!("{}", hello("Rust"));
     println!("{}", greet("Rust"));
+    println!("{}", farewell("Rust"));
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -111,5 +116,20 @@ mod tests {
     #[test]
     fn test_greet_with_chinese_name() {
         assert_eq!(greet("Rust学习者"), "Hey, Rust学习者! Welcome!");
+    }
+
+    #[test]
+    fn test_farewell_with_name() {
+        assert_eq!(farewell("World"), "Goodbye, World! See you next time!");
+    }
+
+    #[test]
+    fn test_farewell_with_empty_name() {
+        assert_eq!(farewell(""), "Goodbye, ! See you next time!");
+    }
+
+    #[test]
+    fn test_farewell_with_chinese_name() {
+        assert_eq!(farewell("Rust学习者"), "Goodbye, Rust学习者! See you next time!");
     }
 }
