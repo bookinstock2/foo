@@ -24,10 +24,17 @@ pub fn farewell(name: &str) -> String {
     format!("Goodbye, {}! See you next time!", name)
 }
 
+pub fn lucky_number(name: &str) -> u32 {
+    let sum: u32 = name.bytes().map(|b| b as u32).sum();
+    sum % 100
+}
+
 fn main() {
     println!("{}", hello("Rust"));
     println!("{}", greet("Rust"));
     println!("{}", farewell("Rust"));
+    let n = lucky_number("Rust");
+    println!("Your lucky number is: {n}");
     println!();
     println!("🦀 Rust 核心概念学习项目\n");
 
@@ -131,5 +138,28 @@ mod tests {
     #[test]
     fn test_farewell_with_chinese_name() {
         assert_eq!(farewell("Rust学习者"), "Goodbye, Rust学习者! See you next time!");
+    }
+
+    #[test]
+    fn test_lucky_number_with_name() {
+        // R(82) + u(117) + s(115) + t(116) = 430, 430 % 100 = 30
+        assert_eq!(lucky_number("Rust"), 30);
+    }
+
+    #[test]
+    fn test_lucky_number_with_empty_name() {
+        assert_eq!(lucky_number(""), 0);
+    }
+
+    #[test]
+    fn test_lucky_number_range() {
+        let n = lucky_number("anything");
+        assert!(n < 100);
+    }
+
+    #[test]
+    fn test_lucky_number_single_char() {
+        // 'A' = 65, 65 % 100 = 65
+        assert_eq!(lucky_number("A"), 65);
     }
 }
